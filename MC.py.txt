@@ -1,0 +1,7 @@
+class MC:
+	vida:int = 100
+	## cosas de programador
+
+	def __init__(self):
+		##Mas cosas de programador.
+		pass
