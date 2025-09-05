@@ -1,0 +1,3 @@
+class MC:
+	vida:int = 100
+	## cosas de programador
