@@ -81,6 +81,7 @@ class ListaEnlazada:
         
         if index == 0: ##Si el indice es 0 elimino el root.
             self.head = self.head.nodo_siguiente
+            return
         
 
         if index != None: # Si tengo que eliminar en un indice en particular.
@@ -106,6 +107,7 @@ class ListaEnlazada:
                 
                 
                 puntero = puntero.nodo_siguiente
+
             return
         
 

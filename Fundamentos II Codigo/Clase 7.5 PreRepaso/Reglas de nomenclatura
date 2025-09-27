@@ -1,0 +1,32 @@
+"""
+
+Convenciones de nomenclatura.
+
+
+esto_esta_escrito_en_snake_case  -> Todo minuscula, los espacios son guion bajo.
+
+estoEstaEscritoEnCamelCase -> La primer letra en minuscula, luego la primer letra de cada palabra va en Mayuscula. NO HAY ESPACIOS.
+
+EstoEstaEscritoEnPascalCase -> Todas las primeras letra de cada palaba van en mayuscula.
+
+ESTO_ESTA_ESCRITO_EN_UPPERCASE_WHIT_UNDERSCORES -> es UPPERCASE con guion bajos jajaja
+
+-----------------------------------------------------
+
+variables, los rutinas (Metodos, funciones y procedimientos), modulos(Scripts) usan snake_case
+
+Clases usan PascalCase
+
+Los miembros que sean privados empiezan con doble guion bajo
+
+__vida : int = 100
+
+Los miembros protegidos empiezan con un solo guien bajo.
+
+_inteligencia:int = 200
+
+def set_vida(self, vida_:int):
+    self.vida = vida_
+
+
+"""
