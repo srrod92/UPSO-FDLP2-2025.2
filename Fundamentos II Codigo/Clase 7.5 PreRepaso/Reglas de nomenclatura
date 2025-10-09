@@ -21,7 +21,7 @@ Los miembros que sean privados empiezan con doble guion bajo
 
 __vida : int = 100
 
-Los miembros protegidos empiezan con un solo guien bajo.
+Los miembros protegidos empiezan con un solo guion bajo.
 
 _inteligencia:int = 200
 
