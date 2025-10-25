@@ -11,7 +11,17 @@ arbolito.insertar(15)
 arbolito.insertar(3)
 arbolito.insertar(1)
 arbolito.insertar(0)
+arbolito.insertar(8)
 
+
+print("in orden")
+arbolito.imprimir_inorden(arbolito.raiz)
+
+arbolito.eliminar(arbolito.raiz, 10)
+
+print("in orden")
+arbolito.imprimir_inorden(arbolito.raiz)
+"""
 print("Pre orden")
 arbolito.imprimir_preorden(arbolito.raiz)
 
@@ -20,3 +30,4 @@ arbolito.imprimir_inorden(arbolito.raiz)
 
 print("pos orden")
 arbolito.imprimir_posorden(arbolito.raiz)
+"""

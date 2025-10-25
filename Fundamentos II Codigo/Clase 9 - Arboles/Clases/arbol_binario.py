@@ -56,14 +56,48 @@ class ArbolBinario:
         print(nodoActual.data)
 
 
+    def eliminar(self, raiz:Nodo, valor:int):
+        if raiz == None:
+            return
         
-
-
-
-
-
-        
+        #Primero buscar el nodo a eliminar.
+        if valor < raiz.data:
+            raiz.izquierdo = self.eliminar(raiz.izquierdo, valor)
             
 
+        elif valor > raiz.data:
+            raiz.derecho = self.eliminar(raiz.derecho, valor)
+            
 
+        else: #Este caso es el que encuentra el nodo a eliminar.
+
+            if raiz.izquierdo == None and raiz.derecho == None: #Caso donde tengo que eliminar una hoja
+                return None
+            
+            elif raiz.izquierdo == None: #Caso donde hay un solo hijo y esta a la derecha
+                return raiz.derecho
+            
+            elif raiz.derecho == None: #Caso donde hay un solo hijo y esta a la izquierda
+                return raiz.izquierdo
+            
+            else: #Caso donde hay dos hijos -> Esto se lo dificil.
+
+                posterior = self._busqueda_menor(raiz.derecho)
+
+                raiz.data = posterior.data
+
+                raiz.derecho = self.eliminar(raiz.derecho, posterior.data)
+        return raiz
+
+   
+    
+    def _busqueda_menor(self, raiz:Nodo)-> Nodo:
+        if raiz == None:
+            return None
         
+        nodo_actual = raiz
+        while nodo_actual.izquierdo != None:
+            nodo_actual = nodo_actual.izquierdo
+
+        return nodo_actual
+    
