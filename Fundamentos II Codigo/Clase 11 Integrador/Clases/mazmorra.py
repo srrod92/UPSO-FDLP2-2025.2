@@ -1,11 +1,40 @@
 import random
-from Clases import Vacio, Mc
+from .vacio import Vacio
+from .mc import Mc
+from .pinche import Pinche
 class Mazmorra:
     def __init__(self, alto:int, ancho:int ):
         self.alto = alto
         self.ancho=ancho
         self.mazmorra = []
         self.__construir_mazmorra()
+        
+
+        
+    def mover_mc(self, direccion:str) -> bool:
+        direccion = direccion.lower()
+        self.mazmorra[self.mc.pos_fila][self.mc.pos_columna] = Vacio()
+        match direccion:
+            case "w":
+                if self.mc.pos_fila > 0:
+                    self.mc.pos_fila -= 1
+            case "a":
+                if self.mc.pos_columna > 0:
+                    self.mc.pos_columna -= 1
+            case "s":
+                if self.mc.pos_fila < self.alto-1:
+                    self.mc.pos_fila += 1
+            case "d":
+                if self.mc.pos_columna < self.ancho-1:
+                    self.mc.pos_columna += 1
+        colision = self.mazmorra[self.mc.pos_fila][self.mc.pos_columna]
+        self.mazmorra[self.mc.pos_fila][self.mc.pos_columna] = self.mc
+        terminar = self.mc.colision(colision)
+
+        if terminar:
+            return True
+
+       
 
         
 
@@ -30,7 +59,7 @@ class Mazmorra:
                 ancho_aleatorio = random.randint(0,self.ancho-1)
 
                 if isinstance(self.mazmorra[alto_aleatorio][ancho_aleatorio], Vacio):
-                    self.mazmorra[alto_aleatorio][ancho_aleatorio] = "🔪"
+                    self.mazmorra[alto_aleatorio][ancho_aleatorio] = Pinche()
                     break
 
         for personaje in range(mc_restante): 
@@ -40,7 +69,9 @@ class Mazmorra:
                 ancho_aleatorio = random.randint(0, self.ancho-1)
 
                 if isinstance(self.mazmorra[alto_aleatorio][ancho_aleatorio], Vacio):
-                    self.mazmorra[alto_aleatorio][ancho_aleatorio] = Mc()
+                    self.mazmorra[alto_aleatorio][ancho_aleatorio] = Mc(alto_aleatorio, ancho_aleatorio)
+                    self.mc = self.mazmorra[alto_aleatorio][ancho_aleatorio]
+                    
                     break
 
         for puerta in range(puerta_restante):
@@ -97,12 +128,12 @@ class Mazmorra:
 
 🔲 🔲 🔲 🔑 🔲 🔲 🔲 🔲 🔲 🔲 
 🔲 🔲 🔲 🔲 🔲 🔲 🔲 🔲 🔲 🔲 
-🔲 🔲 🔲 🔲 🔲 🔲 🔲 🔲  🔲 
+🔲 🔲 🔲 🔲 🔲 🔲 🔲 🔲 🔲 🔲
 🔲 🔲 🔲 🔲 🔲 🔲 🔲 🔲 🔲 🔲 
-🔲 🔲 🔲 🔲 👹 🔲 🔲 🔲 🔲 🔪 
+🔲 🔲 🔲 🔲 👹 🔲 🔲 🔲 🔲 🔲 
 🔲 🔲 🔲 🔲 🔲 🔲 👹 🔲 👹 🔲 
-🔲 🔲 🔲 🔲 🔲 🔲 🔲 🔲 🔲 🔲 
-👹 🔲 🔲 🔪 🔲 🔑 🔲 😝 🔲 🔲 
+🔲 🔲 🔲 🔲 🔲 🔲 🔲 😝 🔲 🔲 
+👹 🔲 🔲 🔲 🔲 🔑 🔲 🔲 🔲 🔲 
 
 
     """
