@@ -2,6 +2,8 @@ import random
 from .vacio import Vacio
 from .mc import Mc
 from .pinche import Pinche
+from .puerta import Puerta
+from .llave import Llave
 class Mazmorra:
     def __init__(self, alto:int, ancho:int ):
         self.alto = alto
@@ -9,11 +11,44 @@ class Mazmorra:
         self.mazmorra = []
         self.__construir_mazmorra()
         
+    def __calcular_nueva_posicion(self, elemento, direccion:str):
+        nueva_pos_fila = None
+        nueva_pos_columna = None
+        match direccion:
+                    case "w":
+                        if elemento.pos_fila > 0:
+                            nueva_pos_fila = elemento.pos_fila - 1
+                            nueva_pos_columna = elemento.pos_columna
+                    case "a":
+                        if elemento.pos_columna > 0:
+                            nueva_pos_columna = elemento.pos_columna - 1
+                            nueva_pos_fila = elemento.pos_fila
+                    case "s":
+                        if elemento.pos_fila < self.alto-1:
+                            nueva_pos_fila = elemento.pos_fila + 1
+                            nueva_pos_columna = elemento.pos_columna
+                    case "d":
+                        if elemento.pos_columna < self.ancho-1:
+                            nueva_pos_columna = elemento.pos_columna + 1
+                            nueva_pos_fila = elemento.pos_fila
+
+        if nueva_pos_columna == None and nueva_pos_fila == None:
+            nueva_pos_fila = elemento.pos_fila
+            nueva_pos_columna = elemento.pos_columna
+
+        return nueva_pos_fila, nueva_pos_columna
+
 
         
     def mover_mc(self, direccion:str) -> bool:
         direccion = direccion.lower()
-        self.mazmorra[self.mc.pos_fila][self.mc.pos_columna] = Vacio()
+
+        if self.mc.get_position() == self.puerta.get_position():
+            self.mazmorra[self.mc.pos_fila][self.mc.pos_columna] = self.puerta
+        else:
+            self.mazmorra[self.mc.pos_fila][self.mc.pos_columna] = Vacio()
+
+            
         match direccion:
             case "w":
                 if self.mc.pos_fila > 0:
@@ -81,7 +116,8 @@ class Mazmorra:
                 ancho_aleatorio = random.randint(0, self.ancho-1)
 
                 if isinstance(self.mazmorra[alto_aleatorio][ancho_aleatorio], Vacio):
-                    self.mazmorra[alto_aleatorio][ancho_aleatorio] = "🚪"
+                    self.mazmorra[alto_aleatorio][ancho_aleatorio] = Puerta(alto_aleatorio, ancho_aleatorio)
+                    self.puerta = self.mazmorra[alto_aleatorio][ancho_aleatorio]
                     break
 
         for troll in range(troll_restante):
@@ -101,7 +137,7 @@ class Mazmorra:
                 ancho_aleatorio = random.randint(0, self.ancho-1)
 
                 if isinstance(self.mazmorra[alto_aleatorio][ancho_aleatorio], Vacio):
-                    self.mazmorra[alto_aleatorio][ancho_aleatorio] = "🔑"
+                    self.mazmorra[alto_aleatorio][ancho_aleatorio] = Llave()
                     break
                 
         
