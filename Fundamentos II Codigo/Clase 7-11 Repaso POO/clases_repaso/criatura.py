@@ -17,4 +17,6 @@ class Criatura:
         if dano_real>0:
             print(f"{self.nombre} recibe {dano_real} daño")
             self.vida -= dano_real
-            
+    
+
+    

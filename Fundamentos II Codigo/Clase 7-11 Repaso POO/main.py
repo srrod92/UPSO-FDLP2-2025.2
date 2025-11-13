@@ -1,5 +1,5 @@
 ##MAIN - PUNTO DE ENTRADA AL PROYECTO
-"""
+
 import os
 from clases.botella import Botella
 from clases.lata import Lata
@@ -16,10 +16,8 @@ saruman = Mago("Saruman", 90, 50, 5, 40)
 
 gandalf.atacar(saruman)
 
-"""
 
 
-for i in range(3):
-    for j in range(3):
-        print(f"i: {i}, j: {j}")
+
+
 
